@@ -4,7 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistrtionActivity">
+    tools:context=".RegistrtionActivity"
+    >
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -85,16 +90,62 @@
             android:hint="******@gmail/@yahoo....etc"
             android:minWidth="310dp"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phone number"
+            android:id="@+id/phonlbl"
+            android:textSize="18dp"
+            android:layout_below="@+id/emailtxt"
+            android:layout_marginTop="36dp"
+            android:layout_centerHorizontal="true"
+            />
+
+        <EditText
+            android:id="@+id/phontxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/phonlbl"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            android:hint="+2***********"
+            android:minWidth="310dp"
+            />
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/genderswtch"
+            android:text="Male "
+            android:textSize="18dp"
+            android:layout_below="@+id/phontxt"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/genderswtch"
+            android:layout_below="@+id/phontxt"
+            android:layout_marginTop="24dp"
+            android:text="Female"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Register"
             android:id="@+id/regbtn"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/emailtxt"
+            android:layout_below="@+id/genderswtch"
             android:layout_marginTop="24dp"
             android:onClick="regOnClick"
             />
     </RelativeLayout>
+
+</ScrollView>
+
 
 </RelativeLayout>

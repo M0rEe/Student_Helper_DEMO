@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,20 +23,29 @@ public class RegistrtionActivity extends AppCompatActivity {
     private EditText username;
     private EditText password;
     private EditText email;
+    private EditText phone;
     private Button regbtn;
+    private Switch gender;
     private String emailStr;
     private String passStr;
+    private String phonenumberInt;
+    private String usernameStr;
+    private User temp_user;
+    private boolean genderbool;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrtion);
         mAuth    = FirebaseAuth.getInstance();
-        username = findViewById(R.id.usrtxt);
-        password = findViewById(R.id.passtxt);
-        email    = findViewById(R.id.emailtxt);
-        regbtn   = findViewById(R.id.regbtn);
-
+        username = (EditText) findViewById(R.id.usrtxt);
+        password = (EditText) findViewById(R.id.passtxt);
+        email    = (EditText) findViewById(R.id.emailtxt);
+        phone    = (EditText) findViewById(R.id.phontxt);
+        regbtn   = (Button) findViewById(R.id.regbtn);
+        gender   = (Switch) findViewById(R.id.genderswtch);
 
         if(mAuth.getCurrentUser() !=null){
             startActivity(new Intent(getApplicationContext(),Dashboard.class));
@@ -45,8 +55,12 @@ public class RegistrtionActivity extends AppCompatActivity {
     }
 
     public void regOnClick(View view) {
-        emailStr = email.getText().toString().trim();
-        passStr  = password.getText().toString().trim();
+        emailStr       = email.getText().toString().trim();
+        passStr        = password.getText().toString().trim();
+        phonenumberInt = phone.toString();
+        usernameStr    = username.getText().toString().trim();
+        genderbool     = gender.isChecked();
+        temp_user      = new User(usernameStr,phonenumberInt,emailStr,passStr,false);
 
         //checking for email and password existence
         if(TextUtils.isEmpty(emailStr)){
@@ -65,6 +79,7 @@ public class RegistrtionActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Toast.makeText(RegistrtionActivity.this, "User Registered Successfully ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrtionActivity.this, temp_user.toString(), Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(),Dashboard.class));
                     finish();
 
