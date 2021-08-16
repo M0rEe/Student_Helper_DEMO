@@ -66,6 +66,7 @@ public class RegistrtionActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     Toast.makeText(RegistrtionActivity.this, "User Registered Successfully ", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(),Dashboard.class));
+                    finish();
 
                 }else{
                     Toast.makeText(RegistrtionActivity.this, "Error occurred "+task.getException().getMessage(), Toast.LENGTH_SHORT).show();

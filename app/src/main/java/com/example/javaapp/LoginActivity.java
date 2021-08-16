@@ -73,5 +73,6 @@ public class LoginActivity extends AppCompatActivity {
     public void gotoreg(View view) {
         Intent intent = new Intent(this, RegistrtionActivity.class);
         startActivity(intent);
+        finish();
     }
 }

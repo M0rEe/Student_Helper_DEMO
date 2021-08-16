@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,27 +7,25 @@
     tools:context=".Dashboard">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tsttxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="27la msa 3lek ya negm you have logged in successfully "
+        android:text="you have logged in successfully"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.206" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp"
+        android:padding="24dp"
+
+        />
 
     <Button
         android:id="@+id/logoutbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="log out"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.094"
+        android:layout_below="@+id/tsttxt"
+        android:layout_centerHorizontal="true"
+
         android:onClick="logout"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
