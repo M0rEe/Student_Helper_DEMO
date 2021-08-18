@@ -47,7 +47,7 @@
             android:layout_marginTop="24dp"
             android:hint="Username"
             android:minWidth="310dp"
-            />
+            android:singleLine="true" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,7 +68,8 @@
             android:layout_marginTop="24dp"
             android:hint="Password"
             android:minWidth="310dp"
-            />
+            android:password="true"
+            android:singleLine="true" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -89,7 +90,8 @@
             android:layout_marginTop="24dp"
             android:hint="******@gmail/@yahoo....etc"
             android:minWidth="310dp"
-            />
+
+            android:singleLine="true" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -110,7 +112,9 @@
             android:layout_marginTop="24dp"
             android:hint="+2***********"
             android:minWidth="310dp"
-            />
+            android:numeric="integer"
+            android:singleLine="true" />
+
         <Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

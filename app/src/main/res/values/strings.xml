@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Fitness App</string>
+    <string name="app_name">Student Helper App</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
