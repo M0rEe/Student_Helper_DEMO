@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+
 import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity {
@@ -28,6 +29,10 @@ public class LoginActivity extends AppCompatActivity {
     private String emailStr;
     private String passStr;
     private User temp_login_usr_checker;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -35,9 +40,10 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Registerationbtn = (Button) findViewById(R.id.loginbtn);
         loginbtn         = (Button) findViewById(R.id.loginbtn);
-        email         = (EditText) findViewById(R.id.emailtxt);
+        email            = (EditText) findViewById(R.id.emailtxt);
         password         = (EditText) findViewById(R.id.passtxt);
         mAuth            = FirebaseAuth.getInstance();
+
 
     }
 
@@ -89,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void gotoreg(View view) {
-        Intent intent = new Intent(this, RegistrtionActivity.class);
+        Intent intent = new Intent(getApplicationContext(), RegistrtionActivity.class);
         startActivity(intent);
         finish();
     }

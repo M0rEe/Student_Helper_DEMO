@@ -4,6 +4,8 @@ import android.text.TextUtils;
 import android.util.Patterns;
 import android.widget.EditText;
 
+import org.jetbrains.annotations.NotNull;
+
 public class User {
     private String username;
     private String phonenumber;
@@ -19,16 +21,7 @@ public class User {
         this.gender = gender;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", phonenumber='" + phonenumber + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", gender=" + gender +
-                '}';
-    }
+
 
     public String getUsername() {
         return username;
@@ -70,6 +63,34 @@ public class User {
         }
         if(u.password.length()<8){
             password.setError("password length should be more than 8 characters");
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkFormatted (@NotNull User u, EditText email, EditText password, EditText phonenumber){
+        if(TextUtils.isEmpty(u.email)){
+            email.setError("Email not Found");
+            return false;
+        }
+        if(!Patterns.EMAIL_ADDRESS.matcher(u.email).matches()){
+            email.setError("Email Formatted not eligible ");
+            return false;
+        }
+        if(TextUtils.isEmpty(u.password)){
+            password.setError("password not Found");
+            return false;
+        }
+        if(u.password.length()<8){
+            password.setError("password length should be more than 8 characters");
+            return false;
+        }
+        if(TextUtils.isEmpty(u.phonenumber)){
+            phonenumber.setError("Phone number  not Found");
+            return false;
+        }
+        if(u.phonenumber.length()<11){
+            phonenumber.setError("Phone number is not correct ");
             return false;
         }
         return true;

@@ -1,22 +1,22 @@
 package com.example.javaapp;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 public class RegistrtionActivity extends AppCompatActivity {
 
@@ -31,9 +31,9 @@ public class RegistrtionActivity extends AppCompatActivity {
     private String passStr;
     private String phonenumberStr;
     private String usernameStr;
-    private User temp_user;
+     User temp_user;
     private boolean genderbool;
-
+/// Database setup
 
 
     @Override
@@ -58,10 +58,21 @@ public class RegistrtionActivity extends AppCompatActivity {
     public void regOnClick(View view) {
         emailStr       = email.getText().toString().trim();
         passStr        = password.getText().toString();
-        phonenumberStr = phone.toString();
+        phonenumberStr = phone.getText().toString();
         usernameStr    = username.getText().toString().trim();
         genderbool     = gender.isChecked();
         temp_user      = new User(usernameStr,phonenumberStr,emailStr,passStr,genderbool);
+
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("message");
+         
+        if(myRef.setValue("Hello World").isSuccessful()){
+            Toast.makeText(this, "done ", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "Error " +myRef.setValue("Hello World").getException() , Toast.LENGTH_SHORT).show();
+        }
+
 
         //checking for email and password existence
 //        if(TextUtils.isEmpty(emailStr)){
@@ -80,10 +91,14 @@ public class RegistrtionActivity extends AppCompatActivity {
 //            password.setError("password length should be more than 8 characters");
 //            return;
 //        }
-        if(!temp_user.checkFormatted(temp_user,email,password)){
+
+        if(!temp_user.checkFormatted(temp_user,email,password,phone)){
             return;
         }
-        //registering user to the firebase data
+
+
+
+    //registering user to the firebase data
         mAuth.createUserWithEmailAndPassword(emailStr,passStr).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {

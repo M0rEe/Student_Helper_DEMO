@@ -10,21 +10,56 @@
         android:id="@+id/tsttxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="you have logged in successfully"
+        android:text="You have logged in successfully"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="36dp"
-        android:padding="24dp"
 
         />
+        <TextView
+            android:id="@+id/userlbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="36dp"
+            android:layout_below="@+id/tsttxt"
+            android:text="Username :"
 
+            />
+    <TextView
+        android:id="@+id/emaillbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp"
+        android:layout_below="@+id/userlbl"
+        android:text="E-mail :"
+
+        />
+    <TextView
+        android:id="@+id/phonelbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp"
+        android:layout_below="@+id/emaillbl"
+        android:text="Phonenumber :"
+
+        />
     <Button
         android:id="@+id/logoutbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="log out"
-        android:layout_below="@+id/tsttxt"
+        android:layout_below="@+id/phonelbl"
+        android:layout_marginTop="36dp"
         android:layout_centerHorizontal="true"
 
         android:onClick="logout"/>
