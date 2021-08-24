@@ -31,10 +31,11 @@ public class RegistrtionActivity extends AppCompatActivity {
     private String passStr;
     private String phonenumberStr;
     private String usernameStr;
-     User temp_user;
+    private User temp_user;
     private boolean genderbool;
 /// Database setup
-
+    private DbHelper DB;
+    private boolean check_insertion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,9 @@ public class RegistrtionActivity extends AppCompatActivity {
         regbtn   = (Button) findViewById(R.id.regbtn);
         gender   = (Switch) findViewById(R.id.genderswtch);
 
+
+        DB       = new DbHelper(this);
+
         if(mAuth.getCurrentUser() !=null){
             startActivity(new Intent(getApplicationContext(),Dashboard.class));
             finish();
@@ -56,47 +60,26 @@ public class RegistrtionActivity extends AppCompatActivity {
     }
 
     public void regOnClick(View view) {
-        emailStr       = email.getText().toString().trim();
-        passStr        = password.getText().toString();
-        phonenumberStr = phone.getText().toString();
-        usernameStr    = username.getText().toString().trim();
-        genderbool     = gender.isChecked();
-        temp_user      = new User(usernameStr,phonenumberStr,emailStr,passStr,genderbool);
+        emailStr         = email.getText().toString().trim();
+        passStr          = password.getText().toString();
+        phonenumberStr   = phone.getText().toString();
+        usernameStr      = username.getText().toString().trim();
+        genderbool       = gender.isChecked();
+        temp_user        = new User(usernameStr,phonenumberStr,emailStr,passStr,genderbool);
 
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
-         
-        if(myRef.setValue("Hello World").isSuccessful()){
-            Toast.makeText(this, "done ", Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(this, "Error " +myRef.setValue("Hello World").getException() , Toast.LENGTH_SHORT).show();
-        }
-
-
-        //checking for email and password existence
-//        if(TextUtils.isEmpty(emailStr)){
-//            email.setError("Email not Found");
-//            return;
-//        }
-//        if(!Patterns.EMAIL_ADDRESS.matcher(emailStr).matches()){
-//            email.setError("Email Formatted not eligible ");
-//            return;
-//        }
-//        if(TextUtils.isEmpty(passStr)){
-//            password.setError("password not Found");
-//            return;
-//        }
-//        if(passStr.length()<8){
-//            password.setError("password length should be more than 8 characters");
-//            return;
-//        }
 
         if(!temp_user.checkFormatted(temp_user,email,password,phone)){
             return;
         }
 
+        check_insertion  = DB.insert_userdata(usernameStr,emailStr,phonenumberStr,passStr);
 
+
+        if (check_insertion == true ){
+            Toast.makeText(this, "Successfully Insertion  ", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "Failed Insertion  ", Toast.LENGTH_SHORT).show();
+        }
 
     //registering user to the firebase data
         mAuth.createUserWithEmailAndPassword(emailStr,passStr).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -105,6 +88,7 @@ public class RegistrtionActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     Toast.makeText(RegistrtionActivity.this, "User Registered Successfully ", Toast.LENGTH_SHORT).show();
                     Intent intent =new Intent(getApplicationContext(),Dashboard.class);
+                    //passing data
                     intent.putExtra("email",temp_user.getEmail());
                     intent.putExtra("pass",temp_user.getPassword());
                     intent.putExtra("phone",temp_user.getPhonenumber());
